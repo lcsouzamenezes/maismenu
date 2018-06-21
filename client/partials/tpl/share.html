@@ -1,0 +1,42 @@
+<md-bottom-sheet class="md-grid" layout="column">
+
+    <div layout="row" layout-align="center center" ng-cloak>
+        <h4 class="md-headline">Compartilhar <strong>{{product.title}}</strong></h4>
+    </div>
+
+    <div ng-cloak>
+
+        <md-list flex layout="row" layout-align="center center">
+
+            <md-list-item>
+                <div>
+                <md-button class="md-grid-item-content google-share-button" href="https://plus.google.com/share?url={{product.url}}" md-click="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                    <md-icon md-svg-src="google"></md-icon>
+                    <div class="md-grid-text">Google+</div>
+                </md-button>
+                </div>
+            </md-list-item>
+
+            <md-list-item>
+                <div>
+                <md-button class="md-grid-item-content facebook-share-button" href="https://www.facebook.com/sharer/sharer.php?u={{product.url}}" target="_blank">
+                    <md-icon md-svg-src="facebook"></md-icon>
+                    <div class="md-grid-text">Facebook</div>
+                </md-button>
+                </div>
+            </md-list-item>
+
+            <md-list-item>
+                <div>
+                <md-button class="md-grid-item-content twitter-share-button" href="https://twitter.com/share?url={{product.url}}&text={{product.title}} só no {{client.title}}" md-click="javascript:window.open({{product.url}}, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                    <md-icon md-svg-src="twitter"></md-icon>
+                    <div class="md-grid-text">Twitter</div>
+                </md-button>
+                </div>
+            </md-list-item>
+
+        </md-list>
+
+    </div>
+
+</md-bottom-sheet>

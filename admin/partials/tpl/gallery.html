@@ -1,0 +1,28 @@
+<md-dialog aria-label="Selecione Media" flow-init flow-files-submitted="$flow.upload(); uploadJSON($files)" md-theme="{{themes_select}}">
+
+    <md-toolbar class="md-primary md-tall">
+        <div class="md-toolbar-tools">
+            <h2>Selecionar Imagens</h2>
+            <span flex></span>
+            <span>{{selectedmedia.length}} {{selectedmedia.length > 1 ? 'imagens selecionadas' : 'imagem selecionada'}}</span>
+        </div>
+    </md-toolbar>
+
+    <md-button class="md-raised md-accent md-fab md-fab-top-right" aria-label="Upload media" flow-btn style="top: 85px;"><md-icon>add</md-icon></md-button>
+
+    <md-dialog-content class="md-no-padding">
+
+        <div class="dialog-media">
+            <figure ng-repeat="p in media" toggle-class="selected-media" ng-click="setMedia(p.filename, $index)">
+                <img ng-src="{{p.filename}}" alt="">
+            </figure>
+        </div>
+
+    </md-dialog-content>
+
+    <div class="md-actions" layout="row">
+        <md-button class="md-accent" ng-click="applyMedia()">Adicionar</md-button>
+        <md-button ng-click="cancelMedia()">Cancelar</md-button>
+    </div>
+
+</md-dialog>

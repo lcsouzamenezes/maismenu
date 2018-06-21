@@ -1,0 +1,40 @@
+<div layout="column">
+
+	<md-toolbar>
+        <div class="md-toolbar-tools admin-toolbar-tools" ng-click="openMenu()" md-swipe-left="closeMenu()" md-swipe-right="openMenu()" tabIndex="-1">
+    		<md-button class="md-icon-button" aria-label="Toggle Menu"><md-icon>menu</md-icon></md-button>
+    		<h2 class="md-title"><span>DASHBOARD</span></h2>
+        </div>
+    </md-toolbar>
+
+	<md-card>
+
+	    <md-card-content>
+
+	        <h2>Produtos recentes</h2>
+
+	        <md-list>
+
+	            <md-subheader class="md-no-sticky" ng-if="!products.length">Nenhum produto foi cadastrado ainda.</md-subheader>
+
+	            <md-list-item class="md-2-line" ng-repeat="product in products | limitTo: 5">
+
+					<img class="md-avatar" ng-src="{{product.image}}" alt="{{product.image}}" />
+
+	                <div class="md-list-item-text">
+	                    <h3>{{product.title}}</h3>
+	                    <small ng-bind-html="product.desc"></small>
+	                </div>
+
+	            </md-list-item>
+	            <md-divider ></md-divider>
+
+	        </md-list>
+
+	        <md-button ui-sref="admin.products()">Ver todos os Produtos</md-button>
+
+	    </md-card-content>
+
+	</md-card>
+
+</div>

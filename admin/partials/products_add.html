@@ -1,0 +1,110 @@
+<md-toolbar>
+	<div class="md-toolbar-tools admin-toolbar-tools" ng-click="openMenu()" tabIndex="-1">
+		<md-button class="md-icon-button" aria-label="Toggle Menu"><md-icon>menu</md-icon></md-button>
+		<h2 class="md-title"><span>Adicionar novo Produto</span></h2>
+	</div>
+</md-toolbar>
+
+<md-button class="md-raised md-accent md-fab md-fab-top-right" aria-label="Salvar produto" ng-click="saveProduct(product)">
+	<md-icon>save</md-icon>
+	<md-tooltip>Salvar produto</md-tooltip>
+</md-button>
+
+<md-content layout-gt-lg="row" layout-wrap>
+
+	<div flex-gt-lg="80">
+
+		<div admin-padding>
+
+			<md-input-container class="md-block">
+				<label>Título do Produto</label>
+				<input ng-model="product.title" ng-change="slugIt(product.title)" required>
+			</md-input-container>
+
+			<md-input-container class="md-block">
+				<label>Link permanente</label>
+				<input ng-model="product.slug" disabled>
+			</md-input-container>
+
+			<md-input-container class="md-block">
+				<label>Valor do Produto (R$)</label>
+				<input ng-model="product.price" type="number" step="0.1" required>
+			</md-input-container>
+
+
+			<text-angular ng-model="product.desc"></text-angular>
+			<!-- <textarea froala="froalaOptions" ng-model="product.desc"></textarea> -->
+
+			<md-input-container class="md-block">
+				<label>Texto chamativo para o Produto</label>
+				<input ng-model="product.excerpt">
+			</md-input-container>
+
+		</div>
+
+	</div>
+
+	<div flex-gt-lg="20" style="background-color:#f1f1f1;">
+
+		<div admin-padding>
+
+			<h4>Configurações do Produto</h4>
+
+			<br>
+
+			<md-input-container class="md-accent md-block">
+				<label>Status da Publicação</label>
+				<md-select name="situation" ng-model="product.situation" placeholder="{{module[0].titles}} status" class="md-accent">
+					<md-option value="1" selected="selected" class="md-accent">Publicado</md-option>
+					<md-option value="2" class="md-accent">Rascunho</md-option>
+					<md-option value="3" class="md-accent">Lixeira</md-option>
+				</md-select>
+			</md-input-container>
+
+			<br>
+
+			<h4>Data de Criação</h4>
+			<md-datepicker class="md-accent" ng-model="product._created_on" md-placeholder="Data da Postagem"></md-datepicker>
+
+		</div>
+
+
+		<md-divider></md-divider>
+
+		<div admin-padding>
+
+			<md-list>
+
+				<md-subheader class="md-no-sticky">Categorias do Produto</md-subheader>
+
+				<md-list-item ng-if="!client.categories.length">
+					<p >Nenhuma categoria criada.</p>
+				</md-list-item>
+
+				<md-list-item ng-repeat="cat in client.categories">
+					<p>{{cat.title}}</p>
+					<md-checkbox ng-model="product.categories[cat.slug]"></md-checkbox>
+				</md-list-item>
+
+			</md-list>
+
+		</div>
+
+
+
+		<md-divider ng-if="!$last"></md-divider>
+
+		<div admin-padding>
+
+			<h4>Foto do Produto</h4>
+
+			<md-input-container class="md-accent md-block">
+				<img ng-src="{{product.img | uploadDir}}" style="width:100%;display:block;">
+				<choose-media ng-model="product.img"></choose-media>
+			</md-input-container>
+
+		</div>
+
+	</div>
+
+</md-content>

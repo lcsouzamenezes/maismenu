@@ -1,0 +1,155 @@
+<md-toolbar>
+    <div class="md-toolbar-tools admin-toolbar-tools" ng-click="openMenu()" md-swipe-left="closeMenu()" md-swipe-right="openMenu()" tabIndex="-1">
+        <md-button class="md-icon-button" aria-label="Toggle Menu"><md-icon>menu</md-icon></md-button>
+        <h2 class="md-title"><span>INFORMAÇÕES DA EMPRESA</span></h2>
+    </div>
+</md-toolbar>
+
+<md-button class="md-raised md-accent md-fab md-fab-top-right" aria-label="Atualizar Configurações" ng-click="updateConfig()">
+    <md-icon>cached</md-icon>
+    <md-tooltip>Salvar informações</md-tooltip>
+</md-button>
+
+<md-content>
+
+    <div admin-padding>
+
+        <h2 style="margin-bottom:30px;">Dados Gerais</h2>
+
+        <md-input-container class="md-block md-accent">
+            <input ng-model="client.title" placeholder="Nome da Empresa">
+        </md-input-container>
+
+        <md-input-container class="md-block md-accent">
+            <input ng-model="client.id" placeholder="Cliente ID" disabled>
+        </md-input-container>
+
+        <md-input-container class="md-block md-accent">
+            <input type="email" ng-model="client.email" placeholder="Email da Empresa">
+        </md-input-container>
+
+        <md-input-container class="md-block md-accent">
+            <input ng-model="client.website" placeholder="URL do Website">
+        </md-input-container>
+
+        <md-input-container class="md-block md-accent">
+            <input ng-model="client.tel" placeholder="Telefones da Empresa">
+        </md-input-container>
+
+    </div>
+
+    <md-divider></md-divider>
+
+    <div admin-padding>
+
+        <div layout="column">
+
+            <h3>Personalize o seu Cardápio</h3>
+            <p>Utilize seu logotipo e uma imagem em destaque para ilustrar a sua empresa.</p>
+
+            <div layout layout-sm="column" class="md-block">
+
+                <md-card>
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">Insira a sua logomarca</span>
+                            <!-- <span class="md-subhead">subhead</span> -->
+                        </md-card-header-text>
+                    </md-card-header>
+                    <img ng-src="{{client.logo}}" class="md-card-image" alt="Logo">
+                    <md-card-actions layout="row" layout-align="start center">
+                        <choose-media ng-model="client.logo"></choose-media>
+                    </md-card-actions>
+                </md-card>
+
+                <md-card>
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">Insira um background ou foto da sua Empresa</span>
+                            <span class="md-subhead">Esta imagem servirá de ilustração para algumas sessões do Menu.</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <img ng-src="{{client.banner}}" class="md-card-image" alt="Logo">
+                    <md-card-actions layout="row" layout-align="start center">
+                        <choose-media ng-model="client.banner"></choose-media>
+                    </md-card-actions>
+                </md-card>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <md-divider></md-divider>
+
+    <div admin-padding>
+
+        <h3>Dados de Localização</h3>
+
+        <div layout layout-xs="column" class="md-block">
+
+            <md-input-container class="md-accent" flex>
+                <label>Logradouro</label>
+                <input ng-model="client.end">
+            </md-input-container>
+
+            <md-input-container class="md-accent" flex>
+                <label>Número/Complemento</label>
+                <input ng-model="client.end2">
+            </md-input-container>
+
+        </div>
+
+        <md-input-container class="md-accent md-block">
+            <label>Bairro</label>
+            <input ng-model="client.district">
+        </md-input-container>
+
+        <div layout layout-xs="column" class="md-block">
+
+            <md-input-container class="md-accent" flex>
+                <label>Cidade</label>
+                <input ng-model="client.city">
+            </md-input-container>
+
+            <md-input-container class="md-accent" flex>
+                <label>UF</label>
+                <input ng-model="client.state">
+            </md-input-container>
+
+            <md-input-container class="md-accent" flex>
+                <label>CEP</label>
+                <input ng-model="client.cep">
+            </md-input-container>
+
+        </div>
+
+    </div>
+
+    <md-divider></md-divider>
+
+    <div admin-padding>
+
+        <div layout="column">
+
+            <h3>Latitude/Longitude</h3>
+            <p>Utilizado pelo sistema para a pesquisa de cardápios/negócios por distância.</p>
+
+            <div layout layout-sm="column" class="md-block">
+                <md-input-container class="md-accent" flex>
+                    <label>Latitude</label>
+                    <input ng-model="client.localization.lat" disabled>
+                </md-input-container>
+
+                <md-input-container class="md-accent" flex>
+                    <label>Longitude</label>
+                    <input ng-model="client.localization.lng" disabled>
+                </md-input-container>
+            </div>
+
+        </div>
+
+    </div>
+
+</md-content>

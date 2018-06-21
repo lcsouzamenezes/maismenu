@@ -1,0 +1,110 @@
+<div layout="column" layout-fill>
+
+    <md-toolbar ng-controller="SidebarController">
+
+        <div class="md-toolbar-tools" ng-click="openMenu()" tabIndex="-1">
+
+            <md-button class="md-icon-button" aria-label="Toggle Menu"><md-icon>menu</md-icon></md-button>
+
+            <h2>
+              <span>Lista de Produtos</span>
+            </h2>
+
+            <span flex></span>
+
+            <md-data-table-toolbar ng-hide="filterShow" layout="row" layout-align="end center">
+
+                <md-button class="md-icon-button" ng-click="filterShow = true" ng-hide="filterShow"><md-icon>filter_list</md-icon></md-button>
+                <md-button class="md-icon-button" ui-sref="admin.addProduct" ng-hide="filterShow"><md-icon>add</md-icon></md-button>
+
+            </md-data-table-toolbar>
+
+            <md-data-table-toolbar ng-show="filterShow && !selected.length" layout="row" layout-align="end center">
+                <md-icon class="material-icons md-light">search</md-icon>
+                <form flex>
+                    <input ng-model="searchProduct" placeholder="pesquisar">
+                </form>
+                <md-button class="md-icon-button" ng-init="filterShow = false" ng-click="filterShow = !filterShow "><md-icon>close</md-icon></md-button>
+            </md-data-table-toolbar>
+        </div>
+    </md-toolbar>
+
+    <md-data-table-toolbar class="alternate anime-show" layout="row" layout-align="space-between center" ng-show="selected.length">
+        <div>{{selected.length}} {{selected.length > 1 ? 'produtos selecionados' : 'produto selecionado'}}</div>
+        <md-button class="md-icon-button md-button md-default-theme" ng-click="removeProducts($event, $index)">
+            <md-icon class="material-icons md-dark">delete</md-icon>
+        </md-button>
+    </md-data-table-toolbar>
+
+        <md-table-container>
+
+            <table md-table md-row-select multiple ng-model="selected" md-progress="promisse">
+
+                <thead md-head md-order="query.order">
+
+                <tr md-row>
+                    <th md-column>Imagem</th>
+                    <th md-column md-order-by="title" trim><span>Título do Produto</span></th>
+                    <th md-column md-order-by="price" md-numeric><span>Preço (R$)</span></th>
+                    <th md-column md-order-by="created" md-numeric><span>Criado em</span></th>
+                    <th md-column md-order-by="situation"><span>Status</span></th>
+                </tr>
+            </thead>
+
+            <tbody md-body>
+                <!-- <tr md-row md-select="product" md-select-id="{{product.title}}" ng-repeat="product in client.products | limitTo: query.limit: (query.page - 1) * query.limit | filter:searchProduct"> -->
+                <tr md-row md-select="product" md-select-id="{{$index}}" ng-repeat="product in products | filter: searchProduct | orderBy: query.order | limitTo: query.limit: (query.page - 1) * query.limit">
+
+                    <td md-cell>
+                        <figure class="td-image">
+                            <img ng-src="{{product.image}}" alt="{{product.image}}" />
+                        </figure>
+                    </td>
+
+                    <td md-cell>
+                        <div class="controls" layout="row" layout-align="space-between center">
+
+                            <span>{{product.title}}</span>
+                            <span layout>
+                                <md-button class="md-icon-button" aria-label="Editar Produto" ui-sref="admin.editProduct({id: product.id})"><md-icon class="material-icons md-18">mode_edit</md-icon></md-button>
+                                <md-button class="md-icon-button" aria-label="Remover Produto" ng-click="removeProduct(product.id, $index, $event)"><md-icon class="material-icons md-18">delete</md-icon></md-button>
+                                <md-button class="md-icon-button" aria-label="Clonar Produto" ng-click="cloneProduct(product)"><md-icon class="material-icons md-18">repeat</md-icon></md-button>
+                            </span>
+                        </div>
+                    </td>
+
+                    <td md-cell>{{product.price | currency : "R$ "}}</td>
+                    <td md-cell>{{product.created_on | date : 'd MMMM, y'}}</td>
+                    <td md-cell>
+                        <md-select name="situation" ng-model="product.status" placeholder="Status do Produto">
+                            <md-option value="1" selected="selected">Publicado</md-option>
+                            <md-option value="2">Rascunho</md-option>
+                            <md-option value="3">Lixeira</md-option>
+                        </md-select>
+                    </td>
+                </tr>
+            </tbody>
+
+            <!-- <tfoot md-foot>
+                <tr md-row>
+                    <td md-cell></td>
+                    <td md-cell><strong>Total: </strong>{{client.products.length}}</td>
+                    <td md-cell colspan="6"></td>
+                </tr>
+            </tfoot> -->
+
+        </table>
+
+    </md-table-container>
+
+
+
+    <!-- <md-table-footer>
+        <md-icon>store</md-icon>
+        <span><strong>Total de Produtos: </strong>{{client.products.length}}</span>
+    </md-table-footer> -->
+
+
+    <md-table-pagination md-limit-options="[5,10,50,100]" md-limit="query.limit" md-page="query.page" md-total="{{client.products.length}}" md-page-select md-label="{rowsPerPage: 'Produtos por página', of: 'de', page: 'Página'}" md-on-paginate="onPaginate"></md-table-pagination>
+
+</div>

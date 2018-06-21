@@ -1,0 +1,136 @@
+<md-toolbar>
+
+    <div class="client-toolbar md-toolbar-tools">
+
+        <md-button class="md-icon-button" aria-label="Abrir Sidebar" ng-click="toggleSidebar()">
+            <md-icon>menu</md-icon>
+        </md-button>
+
+        <h2><span>{{client.title}}</span></h2>
+
+        <span flex></span>
+
+        <md-button class="md-icon-button" aria-label="Admin" href="http://sharkdigital.com.br/dev/maismenu/admin/#!/{{client.client}}/dashboard">
+            <md-icon>lock</md-icon>
+        </md-button>
+
+        <div class="search">
+            <md-button class="md-icon-button" aria-label="Search Products">
+                <md-icon>search</md-icon>
+            </md-button>
+            <form action="/">
+                <input id="searchinput" type="text" name="search" placeholder="Pesquisar..." />
+                <input type="hidden" name="search-hidden" value="" />
+            </form>
+        </div>
+    </div>
+
+</md-toolbar>
+
+<md-content class="content">
+
+    <div class="banner-home">
+        <img ng-src="{{category.banner | uploadDir}}" alt="{{category.banner}}"/>
+        <span class="banner-caption" ng-if="category.desc" ng-bind-html="category.desc"></span>
+    </div>
+
+    <div class="products" layout="row" layout-wrap>
+
+        <md-card class="md-card-products" ng-repeat="product in products" flex-xs="100" flex-sm="50" flex-md="33" flex="25">
+
+            <img ng-src="{{product.img | uploadDir}}" class="md-card-image" alt="{{product.title}}">
+
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{product.title}}</span>
+                    <span class="md-text">{{product.price | currency:"R$ " }}</span>
+                </md-card-title-text>
+            </md-card-title>
+
+            <md-card-content>
+
+                <div ng-bind-html="product.excerpt"></div>
+
+                <div class="products-info" ng-show="showInfo">
+
+                    <h3>{{product.title}}</h3>
+                    <div class="products-info-desc" ng-bind-html="product.desc"></div>
+
+                </div>
+
+                <div class="products-comments" ng-show="showComments">
+
+                    <md-list>
+
+                        <md-list-item class="md-3-line md-long-text">
+                            <md-icon>chat_bubble</md-icon>
+                            <div class="md-list-item-text">
+                                <small>29/03/1980 ás 19h30</small>
+                                <p>Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam.
+                                    Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum
+                                    velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                                </p>
+                            </div>
+                        </md-list-item>
+
+                      <md-list-item class="md-3-line md-long-text">
+                            <md-icon>chat_bubble</md-icon>
+                            <div class="md-list-item-text">
+                                <small>29/03/1980 ás 19h30</small>
+                                <p>Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam.
+                                    Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.
+                                </p>
+                            </div>
+                        </md-list-item>
+
+                      <md-list-item class="md-3-line md-long-text">
+                            <md-icon>chat_bubble</md-icon>
+                            <div class="md-list-item-text">
+                                <small>29/03/1980 ás 19h30</small>
+                                <p>Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam.
+                                    Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.
+                                </p>
+                            </div>
+                        </md-list-item>
+
+                      <md-list-item class="md-3-line md-long-text">
+                            <md-icon>chat_bubble</md-icon>
+                            <div class="md-list-item-text">
+                                <small>29/03/1980 ás 19h30</small>
+                                <p>Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam.
+                                    Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.
+                                </p>
+                            </div>
+                        </md-list-item>
+
+                    </md-list>
+
+                </div>
+
+            </md-card-content>
+
+            <md-card-actions layout="row" layout-align="end center">
+
+                <md-button class="md-icon-button" aria-label="Mais informações do Produto" ng-init="showInfo = false" ng-click="showInfo = !showInfo">
+                    <md-icon>info</md-icon>
+                    <md-tooltip md-direction="{{demo.tipDirection}}">Informações</md-tooltip>
+                </md-button>
+
+                <md-button class="md-icon-button" aria-label="Curtir Produto">
+                    <md-icon>favorite</md-icon>
+                    <md-tooltip md-direction="{{demo.tipDirection}}">Curtir</md-tooltip>
+                </md-button>
+
+                <md-button class="md-icon-button comment" aria-label="Comente o Produto" ng-init="showComments = false" ng-click="showComments = !showComments">
+                    <md-icon>forum</md-icon>
+                    <md-tooltip md-direction="{{demo.tipDirection}}">Comentários</md-tooltip>
+                </md-button>
+
+
+            </md-card-actions>
+
+        </md-card>
+
+    </div>
+
+</md-content>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html ng-app="cardapioAdminApp">
+
+<head>
+
+    <title ng-bind="client.title + ' | Mais Menu'"></title>
+
+    <!-- <script
+			  src="http://code.jquery.com/jquery-3.1.1.min.js"
+			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+			  crossorigin="anonymous"></script> -->
+
+    <meta charset="utf-8">
+    <meta name="fragment"     content="!">
+    <meta name="description"  content="Cardápio Digital para todos">
+    <meta name="keywords"     content="cardapio, menu, cardapio digital, menu digital">
+    <meta name="viewport"     content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- CSS ADMIN -->
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/textangular.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/main.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/table.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/admin.css">
+
+    <!-- Froala Text Editor -->
+    <!-- <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.3.4/css/froala_editor.min.css' rel='stylesheet' type='text/css' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.3.4/css/froala_style.min.css' rel='stylesheet' type='text/css' />
+
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.3.4/js/froala_editor.min.js'></script>
+    <script>
+
+    $.FroalaEditor.DefineIconTemplate('material_design', '<md-icon class="material-icons">[NAME]</md-icon>');
+    $.FroalaEditor.ICON_DEFAULT_TEMPLATE = 'material_design';
+
+    $.FroalaEditor.DefineIcon('bold', {NAME: 'format_bold'});
+    $.FroalaEditor.DefineIcon('italic', {NAME: 'format_italic'});
+    $.FroalaEditor.DefineIcon('underline', {NAME: 'format_underline'});
+    $.FroalaEditor.DefineIcon('strikeThrough', {NAME: 'strikethrough_s'});
+    $.FroalaEditor.DefineIcon('outdent', {NAME: 'format_indent_decrease'});
+    $.FroalaEditor.DefineIcon('indent', {NAME: 'format_indent_increase'});
+    $.FroalaEditor.DefineIcon('insertHR', {NAME: 'border_color'});
+    $.FroalaEditor.DefineIcon('clearFormatting', {NAME: 'format_clear'});
+    $.FroalaEditor.DefineIcon('undo', {NAME: 'undo'});
+    $.FroalaEditor.DefineIcon('selectAll', {NAME: 'select_all'});
+
+    </script> -->
+
+
+
+</head>
+
+<body ng-cloak flow-prevent-drop>
+
+	<div layout="row" class="content" flex role="main" ui-view></div>
+
+    <!-- LIBS -->
+    <!-- <script src="http://localhost/sharkdev/apps/cardapio/public/libs/angular.min.js"></script>
+    <script src="http://localhost/sharkdev/apps/cardapio/public/libs/angular-ui-router.min.js"></script>
+    <script src="http://localhost/sharkdev/apps/cardapio/public/libs/angular-resource.min.js"></script>
+    <script src="http://localhost/sharkdev/apps/cardapio/public/libs/angular-sanitize.min.js"></script>
+    <script src="http://localhost/sharkdev/apps/cardapio/public/libs/angular-animate.min.js"></script>
+    <script src="http://localhost/sharkdev/apps/cardapio/public/libs/angular-aria.min.js"></script>
+    <script src="http://localhost/sharkdev/apps/cardapio/public/libs/angular-locale-pt-br.js"></script> -->
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular.min.js"></script>
+    <script src="//unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-messages.min.js"></script>
+    <script src="https://code.angularjs.org/1.7.0/i18n/angular-locale_pt-br.js"></script>
+
+
+    <script src="../libs/moment.min.js"></script>
+    <script src="../libs/underscore.min.js"></script>
+
+    <script src="../libs/ng-modules/ng-restangular.min.js"></script>
+
+
+    <!-- LOAD ADMIN -->
+    <script src="../libs/ng-modules/md.min.js"></script>
+    <script src="../libs/ng-modules/md-table.min.js"></script>
+    <script src="../libs/ng-modules/ng-textangular-rangy.min.js"></script>
+    <script src="../libs/ng-modules/ng-textangular.min.js"></script>
+    <script src="../libs/ng-modules/ng-fileupload.min.js"></script>
+    <script src="../libs/ng-modules/ng-sortable.js"></script>
+    <!-- <script src="http://localhost/sharkdev/apps/cardapio/public/libs/ng-modules/ng-froala.js"></script> -->
+
+
+    <!-- CONSTANTS -->
+    <script src="../_/app/constants.js"></script>
+
+
+    <!-- APP -->
+    <script src="app/app.js"></script>
+    <script src="app/auth.js"></script>
+    <script src="app/config.js"></script>
+    <script src="app/controllers.js"></script>
+    <script src="app/directives.js"></script>
+    <script src="app/filters.js"></script>
+    <script src="app/modules.js"></script>
+    <script src="app/services.js"></script>
+
+
+</body>
+
+</html>

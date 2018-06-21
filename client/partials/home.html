@@ -1,0 +1,132 @@
+<md-toolbar>
+
+    <div class="client-toolbar md-toolbar-tools">
+
+        <md-button class="md-icon-button" aria-label="Abrir Menu" ng-click="toggleSidebar()">
+            <md-icon>menu</md-icon>
+        </md-button>
+
+        <h2><span>{{client.title}}</span></h2>
+
+        <span flex></span>
+
+        <md-data-table-toolbar ng-hide="filterShow" layout="row" layout-align="end center">
+            <md-button class="md-icon-button" aria-label="Admin" href="../admin/#!/{{client.user}}/dashboard" ng-hide="filterShow"><md-icon>lock</md-icon></md-button>
+            <md-button class="md-icon-button" ng-click="filterShow = true" ng-hide="filterShow"><md-icon>search</md-icon></md-button>
+        </md-data-table-toolbar>
+
+        <md-data-table-toolbar ng-show="filterShow && !selected.length" layout="row" layout-align="end center">
+            <md-icon>search</md-icon>
+            <md-input-container class="search" flex>
+                <input ng-model="searchProduct" placeholder="Pesquisar...">
+            </md-input-container>
+            <md-button class="md-icon-button" ng-init="filterShow = false" ng-click="filterShow = !filterShow "><md-icon>close</md-icon></md-button>
+        </md-data-table-toolbar>
+
+    </div>
+
+</md-toolbar>
+
+<md-content class="content">
+
+    <div class="banner-home" ng-hide="filterShow" style="background-image: url({{client.banner}});">
+
+        <span class="banner-caption" ng-if="client.desc" ng-bind-html="client.desc"></span>
+
+        <!-- <flex-slider slide="banner in banners track by $index" animation="fade" >
+            <li style="background-image: url({{banner.filename | uploadDir}});">
+                <span ng-if="banner.desc" ng-bind-html="banner.desc"></span>
+            </li>
+        </flex-slider> -->
+
+    </div>
+
+    <div class="products" layout="row" layout-wrap>
+
+        <md-card class="md-card-products" ng-repeat="product in products | filter: searchProduct" flex-xs="100" flex-sm="50" flex-md="33" flex="25">
+
+            <div class="product-image" ui-sref="client.product({client: client.user, product: product.id})" ng-hide="filterShow">
+                <img ng-src="{{product.image}}" class="md-card-image" alt="{{product.title}}">
+                <span class="md-text md-price" ng-if="product.price">{{product.price | currency : "R$ " }}</span>
+            </div>
+
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{product.title}}</span>
+                    <div class="md-excerpt" ng-bind-html="product.excerpt"></div>
+                </md-card-title-text>
+            </md-card-title>
+
+            <md-card-content>
+
+                <div class="products-info" ng-show="showInfo">
+
+                    <h3>{{product.title}}</h3>
+                    <div class="products-info-desc" ng-bind-html="product.desc"></div>
+
+                </div>
+
+                <div class="products-comments" ng-show="showComments">
+
+                    <md-list>
+
+                        <md-list-item ng-show="!AprovedComments(product.comments)">
+                            <md-icon>chat_bubble</md-icon>
+                            <p>Este Produto ainda não tem avaliações, seja o primeiro.</p>
+                        </md-list-item>
+
+                        <md-list-item class="md-3-line md-long-text" ng-repeat="comment in product.comments" ng-if="comment.status">
+                            <md-icon>chat_bubble</md-icon>
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{comment.name}}</h3>
+                                <small>{{comment._created_on | date : 'd MMMM, y'}}</small>
+                                <p>{{comment.message}}</p>
+                            </div>
+                        </md-list-item>
+
+                        <md-button class="md-raised md-accent md-fab md-fab-bottom-right" aria-label="Avaliar Produto" ng-click="addComment($event, $index)">
+                            <md-icon>add</md-icon>
+                            <md-tooltip>Avaliar Produto</md-tooltip>
+                        </md-button>
+
+                    </md-list>
+
+                </div>
+
+            </md-card-content>
+
+            <md-card-actions layout="row" layout-align="space-between center" ng-hide="filterShow">
+
+                <div class="product-share">
+                    <md-button class="md-icon-button" aria-label="Compartilhar este Produto" ng-click="showGridBottomSheet(product.title, product.img, $index)">
+                        <md-icon>share</md-icon>
+                        <md-tooltip>Compartilhar</md-tooltip>
+                    </md-button>
+                </div>
+
+                <div class="product-actions">
+
+                    <md-button class="md-icon-button" aria-label="Mais informações do Produto" ng-init="showInfo = false" ng-click="showInfo = !showInfo; showComments = false">
+                        <md-icon>{{showInfo ? 'info' : 'info_outline'}}</md-icon>
+                        <!-- <md-tooltip>Informações</md-tooltip> -->
+                    </md-button>
+
+                    <!-- <md-button class="md-icon-button" aria-label="Curtir Produto">
+                        <md-icon>favorite_border</md-icon>
+                    </md-button> -->
+
+                    <md-button class="md-icon-button comment md-badge" aria-label="Comente o Produto" ng-init="showComments = false" ng-click="showComments = !showComments; showInfo = false">
+                        <md-icon>{{showComments ? 'chat_bubble' : 'chat_bubble_outline'}}</md-icon>
+                        <md-badge ng-if="AprovedComments(product.comments)">{{AprovedComments(product.comments)}}</md-badge>
+                        <!-- <md-tooltip>Comentários</md-tooltip> -->
+                    </md-button>
+
+                </div>
+
+            </md-card-actions>
+
+        </md-card>
+
+    </div>
+
+</md-content>

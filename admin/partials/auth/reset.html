@@ -1,0 +1,30 @@
+<div role="main" tabindex="-1" layout="column" id="main" layout-full flex>
+
+	<!-- <md-toolbar>
+		<div class="md-toolbar-tools admin-toolbar-tools" tabIndex="-1" layout="row" layout-align="center center">
+			<h2 class="md-title">LOGIN EM <span style="text-transform: uppercase;">{{client.client}}</span></h2>
+		</div>
+	</md-toolbar> -->
+
+	<md-content md-scroll-y class="content-bg-login" layout="column" layout-align="space-around center">
+
+		<div layout-padding>
+			<h2>Coloque seu E-mail de cadastro para resetar a sua senha.</h2>
+		</div>
+
+		<div class="content-login" layout-padding>
+
+			<md-input-container md-no-float class="md-accent md-block">
+				<input type="email" name="email" placeholder="E-mail de cadastro" ng-model="user.email" required>
+			</md-input-container>
+
+		</div>
+
+		<div class="content-login" layout="column" layout-align="center center">
+			<md-button class="md-fab md-raised md-accent" ng-click="resetPass(user)" style="margin-bottom: 40px;"><md-icon>arrow_forward</md-icon></md-button>
+			<a class="center" ui-sref="admin.login">Voltar para a Página de Login</a>
+		</div>
+
+	</md-content>
+
+</div>

@@ -1,0 +1,36 @@
+<md-toolbar>
+	<div class="md-toolbar-tools admin-toolbar-tools" ng-click="openMenu()" tabIndex="-1">
+		<md-button class="md-icon-button" aria-label="Toggle Menu"><md-icon>menu</md-icon></md-button>
+		<h2 class="md-title"><span>Imagens</span></h2>
+	</div>
+</md-toolbar>
+
+<md-button choose-file-button="file-input" ng-show="!selectedmedia.length" class="md-raised md-accent md-fab md-fab-top-right" aria-label="Upload imagem" ng-click="">
+	<md-icon>add</md-icon>
+	<md-tooltip>Upload imagem</md-tooltip>
+</md-button>
+
+<input id="file-input" type="file" nv-file-select="" uploader="uploader" multiple class="ng-hide" />
+
+<md-button ng-show="selectedmedia.length" class="md-raised md-accent md-fab md-fab-top-right" aria-label="Deletar Imagens Selecionadas" ng-click="deleteImgs($event, $index)">
+	<md-icon>delete</md-icon>
+	<md-tooltip>Deletar {{selectedmedia.length}} {{selectedmedia.length > 1 ? 'imagens selecionadas' : 'imagem selecionada'}}</md-tooltip>
+</md-button>
+
+<md-content>
+
+	<div>
+
+		<div class="dialog-media">
+
+			<figure ng-repeat="image in client.media" toggle-class="selected-media" ng-click="setMedia(image, $index)">
+
+				<img class="img-responsive img-thumbnail" ng-src="{{image.filename | uploadDir}}" />
+
+			</figure>
+
+		</div>
+
+	</div>
+
+</md-content>

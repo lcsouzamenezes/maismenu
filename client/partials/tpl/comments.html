@@ -1,0 +1,34 @@
+<md-dialog aria-label="Avaliar Produto">
+
+    <form ng-cloak>
+
+        <md-dialog-content>
+
+            <div class="md-dialog-content">
+
+                <h2>Avaliar Produto</h2>
+                <p>A sua avaliação será enviada para a aprovação.</p>
+
+                <md-input-container class="md-block">
+                    <label>Seu Nome</label>
+                    <input ng-model="comment.name" required>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Escreva a sua Avaliação</label>
+                    <textarea ng-model="comment.message" md-maxlength="150" rows="5" required></textarea>
+                </md-input-container>
+
+            </div>
+
+
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()">Cancelar</md-button>
+            <md-button ng-click="addComment(comment)">Enviar Avaliação</md-button>
+        </md-dialog-actions>
+
+    </form>
+
+</md-dialog>

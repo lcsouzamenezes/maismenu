@@ -1,0 +1,107 @@
+<div role="main" tabindex="-1" layout="column" id="main" layout-full flex>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools admin-toolbar-tools" ng-click="openMenu()" tabIndex="-1">
+            <md-button class="md-icon-button" aria-label="Toggle Menu"><md-icon>menu</md-icon></md-button>
+            <div layout="row" flex class="fill-height">
+                <h2 class="md-title">Registro de novo Usuário</h2>
+            </div>
+        </div>
+    </md-toolbar>
+
+    <div layout-gt-lg="row" layout-fill>
+
+        <md-content flex-gt-lg="80">
+
+            <div admin-padding>
+
+                <md-input-container class="md-accent">
+                    <label>Login</label>
+                    <input type="text" name="username" ng-model="user.username" ng-required="true">
+                </md-input-container>
+
+                <md-input-container class="md-accent">
+                    <label>Senha</label>
+                    <input type="password" name="password" ng-model="user.password" ng-required="true">
+                </md-input-container>
+
+                <md-input-container class="md-accent">
+                    <label>Confirmação da Senha</label>
+                    <input type="password" name="password1" ng-model="user.passwordConfirmation" ng-required="true">
+                </md-input-container>
+
+                <md-input-container class="md-accent">
+                    <label>Nome</label>
+                    <input type="text" name="firstname" ng-model="user.firstname" ng-required="true">
+                </md-input-container>
+
+                <md-input-container class="md-accent">
+                    <label>Sobrenome</label>
+                    <input type="text" name="lastname" ng-model="user.lastname" ng-required="true">
+                </md-input-container>
+
+                <md-input-container class="md-accent">
+                    <label>E-mail</label>
+                    <input type="email" name="email" ng-model="user.email" ng-required="true">
+                </md-input-container>
+
+            </div>
+
+        </md-content>
+
+        <div flex-gt-lg="20" style="background-color:#f1f1f1;" layout-align="strecth">
+
+            <div admin-padding>
+
+                <h2 class="md-title">Configurações do Usuário</h2>
+
+                <md-input-container class="md-accent">
+                    <label>Tipo de Usuário</label>
+                    <md-select name="roles" ng-model="user.roles" placeholder="Tipo de Usuário" class="md-accent" required>
+                        <md-option value="simples" selected="selected" class="md-accent">Simples</md-option>
+                        <md-option value="editor" class="md-accent">Editor</md-option>
+                        <md-option value="admin" class="md-accent">Administrador</md-option>
+                    </md-select>
+                </md-input-container>
+
+                <div class="md-actions" layout="row" layout-align="center center">
+                    <md-button type="button" class="md-accent" ng-disabled="fmRegister.$invalid" ng-click="register(user)">Registrar</md-button>
+                    <md-button type="button" ui-sref="admin.users">Cancelar</md-button>
+                </div>
+
+            </div>
+
+            <md-divider ng-if="!$last"></md-divider>
+
+            <div admin-padding>
+
+                <h2 class="md-title">Imagem de Perfil</h2>
+
+                <div class="input-group form-group">
+
+                    <img ng-src="{{user.avatar}}" style="width:100%;display:block;">
+                    <choose-media ng-model="user.avatar"></choose-media>
+
+                </div>
+
+            </div>
+
+
+            <md-divider ng-if="!$last"></md-divider>
+
+            <div admin-padding>
+
+                <h2 class="md-title">Background do Perfil</h2>
+
+                <md-input-container class="md-accent">
+                    <img ng-src="{{user.bg}}" style="width:100%;display:block;">
+                    <choose-media ng-model="user.bg"></choose-media>
+                </md-input-container>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

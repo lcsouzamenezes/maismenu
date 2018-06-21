@@ -1,0 +1,90 @@
+<div layout="column" layout-fill>
+
+    <md-toolbar ng-controller="SidebarController">
+        <div class="md-toolbar-tools" ng-click="openMenu()" tabIndex="-1">
+            <md-button class="md-icon-button" aria-label="Toggle Menu"><md-icon>menu</md-icon></md-button>
+            <h2>
+              <span>Lista de Banners Promocionais</span>
+            </h2>
+            <span flex></span>
+
+            <md-data-table-toolbar ng-hide="filter.show" layout="row" layout-align="end center">
+
+                <md-button class="md-icon-button" ng-click="filter.show = true" ng-hide="filter.show"><md-icon>filter_list</md-icon></md-button>
+                <md-button class="md-icon-button" ui-sref="admin.addBanner" ng-hide="filter.show"><md-icon>add</md-icon></md-button>
+
+            </md-data-table-toolbar>
+
+            <md-data-table-toolbar ng-show="filter.show && !selected.length" layout="row" layout-align="end center">
+                <md-icon class="material-icons md-light">search</md-icon>
+                <form flex name="filter.form">
+                    <input type="text" ng-model="searchItem.title" placeholder="pesquisar">
+                </form>
+                <md-button class="md-icon-button" ng-click="removeFilter()"><md-icon>close</md-icon></md-button>
+            </md-data-table-toolbar>
+        </div>
+    </md-toolbar>
+
+
+    <md-data-table-toolbar class="alternate anime-show" layout="row" layout-align="space-between center" ng-show="selected.length">
+        <div>{{selected.length}} {{selected.length > 1 ? 'banners selecionados' : 'banner selecionado'}}</div>
+        <md-button class="md-icon-button md-button md-default-theme" ng-click="removeBanners($event, $index)"><md-icon class="material-icons md-dark">delete</md-icon></md-button>
+    </md-data-table-toolbar>
+
+        <md-table-container>
+
+            <table md-table md-row-select ng-model="selected" md-progress="banners">
+
+                <thead md-head md-order="query.order">
+
+                <tr md-row>
+                    <th md-column md-order-by="img">Banner</th>
+                    <th md-column md-order-by="title" trim>Título do Banner</th>
+                    <th md-column md-order-by="created" md-numeric>Criado em</th>
+                    <th md-column md-order-by="situation">Status</th>
+                </tr>
+            </thead>
+
+            <tbody md-body>
+                <tr md-row md-select="banner" md-select-id="{{banner.title}}" ng-repeat="banner in client.banners | limitTo: query.limit: (query.page - 1) * query.limit | filter:searchItem">
+                    <td md-cell>
+                        <figure class="td-image">
+                            <img ng-src="{{banner.filename | uploadDir}}" alt="{{banner.filename}}" />
+                        </figure>
+                    </td>
+
+                    <td md-cell>
+                        <div class="controls" layout="row" layout-align="space-between center">
+
+                            <span>{{banner.title}}</span>
+                            <span layout>
+                                <md-button class="md-icon-button" aria-label="Editar Banner" ui-sref="admin.editBanner({banner: $index})"><md-icon class="material-icons md-18">mode_edit</md-icon></md-button>
+                                <md-button class="md-icon-button" aria-label="Remover Banner" ng-click="removeBanner($index, $event)"><md-icon class="material-icons md-18">delete</md-icon></md-button>
+                                <md-button class="md-icon-button" aria-label="Clonar Banner" ng-click="cloneBanner($index)"><md-icon class="material-icons md-18">repeat</md-icon></md-button>
+                            </span>
+                        </div>
+                    </td>
+
+                    <td md-cell>{{banner.created | date : 'd MMMM, y'}}</td>
+                    <td md-cell>
+                        <md-select name="situation" ng-model="banner.situation" placeholder="Status do Post">
+                            <md-option value="1" selected="selected">Publicado</md-option>
+                            <md-option value="2">Rascunho</md-option>
+                            <md-option value="3">Lixeira</md-option>
+                        </md-select>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </md-table-container>
+
+    <md-table-footer>
+        <md-icon>store</md-icon>
+        <span><strong>Total de Banners: </strong>{{client.banners.length}}</span>
+    </md-table-footer>
+
+    <!-- <md-table-pagination md-options="[5,10,50,100]" md-limit="query.limit" md-page="query.page" md-total="{{client.banners.length}}" md-page-select md-label="{rowsPerPage: 'Banners por página', of: 'de', page: 'Página'}"></md-table-pagination> -->
+
+</div>

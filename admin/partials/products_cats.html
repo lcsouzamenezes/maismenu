@@ -1,0 +1,74 @@
+<md-toolbar class="md-primary">
+	<div class="md-toolbar-tools admin-toolbar-tools" ng-click="openMenu()" tabIndex="-1">
+		<md-button class="md-icon-button" aria-label="Toggle Menu"><md-icon>menu</md-icon></md-button>
+		<h2 class="md-title"><span>Categorias dos Produtos</span></h2>
+	</div>
+</md-toolbar>
+
+<md-content layout-gt-lg="row" layout-wrap>
+
+	<div flex-gt-lg="80">
+
+		<div admin-padding>
+
+			<h4>Adicione uma Categoria</h4>
+
+			<br>
+
+			<md-input-container class="md-block">
+				<label >Digite o título aqui</label>
+				<input ng-model="cat.title" ng-change="slugIt(cat.title)" required>
+			</md-input-container>
+
+			<md-input-container class="md-block">
+				<label>Link permanente</label>
+				<input ng-model="cat.slug" disabled>
+			</md-input-container>
+
+			<md-input-container class="md-block">
+				<label>Descrição</label>
+				<textarea ng-model="cat.desc"></textarea>
+			</md-input-container>
+
+			<md-input-container class="md-accent md-block">
+				<img ng-src="{{cat.banner | uploadDir}}" style="width:100%;display:block;">
+				<choose-media ng-model="cat.banner"></choose-media>
+			</md-input-container>
+
+
+			<div layout="row" layout-align="end center">
+				<md-button class="md-fab" type="button" ng-click="addTax(cat); cat = ''" ng-disabled="catsForm.$invalid">
+					<md-icon>send</md-icon>
+				</md-button>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div flex-gt-lg="20" style="background-color:#f1f1f1;">
+
+		<div admin-padding>
+
+			<md-list>
+
+				<md-subheader class="md-no-sticky">Categorias existentes</md-subheader>
+
+				<md-list-item ng-if="!client.categories.length">
+					<p >Nenhuma categoria criada.</p>
+				</md-list-item>
+
+				<md-list-item ng-repeat="cats in client.categories">
+					<p>{{cats.title}}</p>
+					<md-button type="button" class="md-icon-button" ng-click="editTax($index)"><md-icon>edit</md-icon></md-button>
+					<md-button type="button" class="md-icon-button" ng-click="remTax($event,$index)"><md-icon>delete</md-icon></md-button>
+				</md-list-item>
+
+			</md-list>
+
+
+		</div>
+
+	</div>
+
+</md-content>

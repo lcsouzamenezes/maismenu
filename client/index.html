@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html ng-app="cardapioClientApp">
+
+<head>
+
+    <title ng-bind="client.title + ' | Mais Menu'"></title>
+
+    <meta charset="utf-8">
+    <!-- <meta name="fragment"     content="!"> -->
+    <meta name="description"  content="Cardápio Digital para todos">
+    <meta name="keywords"     content="cardapio, menu, cardapio digital, menu digital">
+    <meta name="viewport"     content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <base href="/Apps/maismenu/client/" />
+
+    <link rel="icon" type="image/png" href="../_/assets/images/favicon.png" />
+
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic"> -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,300,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- CSS FRONTEND -->
+    <link rel="stylesheet" type="text/css" href="assets/css/flexslider.min.css">
+    <link rel="stylesheet" type="text/css" href="https://material.angularjs.org/latest/angular-material.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+</head>
+
+<body layout="row">
+
+    <div layout="row" class="content" flex role="main" ui-view></div>
+
+    <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="../libs/flexslider.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular.min.js"></script>
+    <script src="//unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-messages.min.js"></script>
+    <script src="https://code.angularjs.org/1.7.0/i18n/angular-locale_pt-br.js"></script>
+
+    <script src="../libs/moment.min.js"></script>
+    <script src="../libs/underscore.min.js"></script>
+    <script src="../libs/ng-modules/ng-restangular.min.js"></script>
+
+    <script src="../libs/ng-modules/ng-flexslider.js"></script>
+
+    <script src="https://material.angularjs.org/latest/angular-material.min.js"></script>
+
+    <!-- CONSTANTS -->
+    <script src="../_/app/constants.js"></script>
+
+    <!-- LOAD CLIENT -->
+    <script src="app/app.js"></script>
+    <script src="app/controllers.js"></script>
+    <script src="app/configs.js"></script>
+    <script src="app/services.js"></script>
+
+
+</body>
+
+</html>

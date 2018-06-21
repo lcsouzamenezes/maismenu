@@ -1,0 +1,15 @@
+.anime-show {
+  -webkit-transform: translate3d(0,0,0);  transform: translate3d(0,0,0);
+  height: 64px;
+}
+
+.anime-show.ng-hide-add.ng-hide-add-active,
+.anime-show.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: all ease-in-out 0.3s;
+  transition: all ease-in-out 0.3s;
+}
+
+.anime-show.ng-hide {
+  -webkit-transform: translate3d(0,-64px,0);  transform: translate3d(0,-64px,0);
+  height: 0;
+}

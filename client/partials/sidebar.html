@@ -1,0 +1,41 @@
+<header class="sidebar-header">
+
+    <md-toolbar class="sidebar-toolbar">
+
+        <div class="client-toolbar md-toolbar-tools">
+
+            <md-button class="md-icon-button" aria-label="Fechar Sidebar" ng-click="toggleSidebar()">
+                <md-icon>arrow_back</md-icon>
+            </md-button>
+
+            <h2><span>{{client.title}}</span></h2>
+
+        </div>
+
+    </md-toolbar>
+
+    <figure layout="column" layout-align="end start" layout-fill ng-style="{'background-image': 'url(' + client.banner + ')'}">
+
+        <div class="logo-holder">
+            <img ng-src="{{client.logo}}" alt="{{client.desc}}">
+        </div>
+
+    </figure>
+
+</header>
+
+<md-content flex role="navigation">
+
+    <ul class="sidebar-categories">
+
+        <li>
+            <md-button ui-sref="client.index({client: client.user})" ng-click="toggleSidebar()">INDEX</md-button>
+        </li>
+
+        <li ng-repeat="cat in client.categories">
+            <md-button ui-sref="client.category({client: client.user, category: cat.slug})" ng-click="toggleSidebar()">{{cat.title}}</md-button>
+        </li>
+
+    </ul>
+
+</md-content>

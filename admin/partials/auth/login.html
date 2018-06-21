@@ -1,0 +1,36 @@
+<div role="main" tabindex="-1" layout="column" id="main" layout-full flex>
+
+	<!-- <md-toolbar>
+		<div class="md-toolbar-tools admin-toolbar-tools" tabIndex="-1" layout="row" layout-align="center center">
+			<h2 class="md-title">LOGIN EM <span style="text-transform: uppercase;">{{client.client}}</span></h2>
+		</div>
+	</md-toolbar> -->
+
+	<md-content md-scroll-y class="content-bg-login" layout="column" layout-align="space-around center">
+
+		<div class="content-login" layout-padding>
+
+			<span class="login-logo"><img src="assets/images/logo-maismenu.png" alt="logo maismenu" /></span>
+
+			<md-input-container md-no-float class="md-block">
+				<input type="text" name="client" placeholder="Cliente ID" ng-model="user.client" required>
+			</md-input-container>
+
+			<md-input-container md-no-float class="md-block">
+				<input type="password" name="password" placeholder="Senha" ng-model="user.password" required>
+			</md-input-container>
+
+			<small>
+				<a class="center" ui-sref="admin.resetpass">Perdeu a senha? clique aqui.</a>
+			</small>
+
+		</div>
+
+		<div class="content-login" layout="column" layout-align="center center">
+			<md-button class="md-fab md-raised md-accent" ng-click="login()" style="margin-bottom: 40px;"><md-icon>arrow_forward</md-icon></md-button>
+			<a class="center" ng-click="gotoCardapio()">ir para a Página Principal</a>
+		</div>
+
+	</md-content>
+
+</div>

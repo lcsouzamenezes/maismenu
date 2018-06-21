@@ -1,0 +1,48 @@
+<md-dialog class="dialog-media-params" aria-label="Choose Media" flow-init flow-files-added="loadImages($files)">
+
+    <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+            <h2><span>Selecione uma Imagem</span></h2>
+        </div>
+    </md-toolbar>
+
+
+
+    <md-button choose-file-button="file-input" class="md-raised md-accent md-fab md-fab-top-right" aria-label="Upload imagem" ng-click="">
+    	<md-icon>add</md-icon>
+    	<md-tooltip>Upload imagem</md-tooltip>
+    </md-button>
+
+    <input id="file-input" type="file" nv-file-select="" uploader="uploader" multiple class="ng-hide" />
+
+
+    <md-dialog-content style="padding:0;height:100%;">
+
+        <div class="dialog-media">
+
+            <figure ng-repeat="image in media" ng-class="{ 'selected-media': $index == selectedMedia }" ng-click="setMedia(image.filename, $index)">
+
+                <img ng-src="{{uploaddir + image.filename}}" alt="">
+
+            </figure>
+
+        </div>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="space-between center">
+
+        <div class="dialog-media-length">
+            <md-icon>image</md-icon>
+            <span ng-if="media.length">{{media.length}} {{media.length > 1 ? 'imagens' : 'imagem'}}</span>
+            <span ng-if="!media.length">Nenhuma imagem ainda.</span>
+        </div>
+
+        <div class="dialog-media-actions">
+            <md-button class="md-accent" ng-click="applyMedia(imagechoose)">Aplicar</md-button>
+            <md-button ng-click="cancelMedia()">Cancelar</md-button>
+        </div>
+
+    </md-dialog-actions>
+
+</md-dialog>

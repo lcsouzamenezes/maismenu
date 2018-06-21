@@ -1,0 +1,71 @@
+<md-toolbar>
+	<div class="md-toolbar-tools" ng-click="openMenu()" tabIndex="-1">
+		<md-button class="md-icon-button" aria-label="Toggle Menu"><md-icon>menu</md-icon></md-button>
+		<h2 class="md-title"><span>Editar Banner</span></h2>
+	</div>
+</md-toolbar>
+
+<md-button class="md-raised md-accent md-fab md-fab-top-right" aria-label="Atualizar banner" ng-click="saveBanner()">
+	<md-icon>cached</md-icon>
+	<md-tooltip>Atualizar banner</md-tooltip>
+</md-button>
+
+<md-content layout-gt-lg="row" layout-wrap>
+
+	<div flex-gt-lg="80">
+
+		<div admin-padding>
+
+			<md-input-container class="md-block md-accent">
+				<label >Digite o título do Banner</label>
+				<input ng-model="banner.title">
+			</md-input-container>
+
+			<text-angular ng-model="banner.desc"></text-angular>
+
+			<md-input-container class="md-block md-accent">
+
+				<h2 class="md-title">Arte do Banner</h2>
+
+				<div class="input-group form-group">
+
+					<img ng-src="{{banner.filename | uploadDir}}" alt="{{banner.filename}}" style="width:100%;display:block;">
+					<choose-media ng-model="banner.filename"></choose-media>
+
+				</div>
+
+			</md-input-container>
+
+		</div>
+
+		<md-divider ng-if="!$last"></md-divider>
+
+	</div>
+
+	<div flex-gt-lg="20" style="background-color:#f1f1f1;">
+
+		<div admin-padding>
+
+			<h4 class="md-title">Configurações do Banner</h4>
+
+			<br>
+
+			<md-input-container class="md-accent md-block">
+				<label>Status da Publicação</label>
+				<md-select name="situation" ng-model="banner.situation" placeholder="{{module[0].titles}} status" class="md-accent">
+					<md-option value="1" selected="selected" class="md-accent">Publicado</md-option>
+					<md-option value="2" class="md-accent">Rascunho</md-option>
+					<md-option value="3" class="md-accent">Lixeira</md-option>
+				</md-select>
+			</md-input-container>
+
+			<br>
+
+			<h4>Data de Criação</h4>
+			<md-datepicker class="md-accent" ng-model="banner.created" md-placeholder="Data da Postagem"></md-datepicker>
+
+		</div>
+
+	</div>
+
+</md-content>

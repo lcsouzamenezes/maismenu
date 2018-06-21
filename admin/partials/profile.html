@@ -1,0 +1,43 @@
+<md-toolbar>
+    <div class="md-toolbar-tools admin-toolbar-tools" ng-click="openMenu()" tabIndex="-1">
+        <md-button class="md-icon-button" aria-label="Toggle Menu"><md-icon>menu</md-icon></md-button>
+        <h2 class="md-title"><span>ALTERAÇÃO DE SENHA</span></h2>
+    </div>
+</md-toolbar>
+
+<md-button class="md-raised md-accent md-fab md-fab-top-right" aria-label="Atualizar Configurações" ng-click="changePass(client)">
+	<md-icon>cached</md-icon>
+	<md-tooltip>Alterar senha</md-tooltip>
+</md-button>
+
+<div layout-gt-lg="row">
+
+    <md-content flex-gt-lg="80">
+
+        <div admin-padding>
+
+            <md-input-container class="md-block">
+                <label>Cliente ID</label>
+                <input type="text" name="username" ng-model="client.client" disabled>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Digite a sua senha atual</label>
+                <input type="password" name="password" ng-model="client.password" required>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Nova senha</label>
+                <input type="password" name="newpassword" ng-model="client.newpassword">
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Confirmação de nova senha</label>
+                <input type="password" name="newpasswordConfirmation" ng-model="client.newpasswordConfirmation">
+            </md-input-container>
+
+        </div>
+
+    </md-content>
+
+</div>

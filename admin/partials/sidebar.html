@@ -1,0 +1,52 @@
+<header class="sidenav-header">
+
+    <figure layout="column" layout-align="end start" layout-fill data-ng-style="{'background-image': 'url({{client.banner}})'}">
+
+        <img ng-src="{{client.logo}}">
+
+        <figcaption>
+
+            <span class="user">{{client.title}}</span>
+
+            <span class="email" flex layout="row" layout-align="start center">
+
+                <span>{{client.email}}</span>
+                <span flex></span>
+
+                <md-menu>
+                    <md-button aria-label="Perfil de usuário" class="md-icon-button" ng-click="$mdOpenMenu()">
+                        <md-icon md-menu-origin>arrow_drop_down</md-icon>
+                    </md-button>
+                    <md-menu-content width="4">
+                        <md-menu-item>
+                            <md-button ui-sref="admin.profile"><md-icon md-menu-align-target>person</md-icon>Perfil</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ui-sref="admin.logout"><md-icon md-menu-align-target>power_settings_new</md-icon>Sair</md-button>
+                        </md-menu-item>
+                        <md-divider></md-divider>
+                        <md-menu-item>
+                            <md-button ng-click="gotoCardapio()"><md-icon md-menu-align-target>public</md-icon>Ir para o Cardápio</md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+
+            </span>
+        </figcaption>
+    </figure>
+
+</header>
+
+<md-content flex role="navigation">
+
+    <ul class="admin-menu">
+
+        <li ng-repeat="sectionmenu in menu.sections" class="parent-list-item {{sectionmenu.className || ''}}" ng-class="{'parentActive' : isSectionSelected(sectionmenu)}">
+            <h2 class="menu-heading md-subhead" ng-if="sectionmenu.type === 'heading'" id="heading_{{sectionmenu.title}}">{{sectionmenu.title}}</h2>
+            <menu-link sectionmenu="sectionmenu" ng-if="sectionmenu.type === 'link'"></menu-link>
+            <menu-toggle sectionmenu="sectionmenu" ng-if="sectionmenu.type === 'toggle'"></menu-toggle>
+        </li>
+
+    </ul>
+
+</md-content>

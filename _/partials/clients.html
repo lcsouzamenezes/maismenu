@@ -1,0 +1,68 @@
+<header style="background-color:#333; padding-bottom:20px;">
+
+    <div class="container">
+
+        <div class="top-bar">
+
+            <div class="left">
+                <a href="index.html" class="current current logo">
+                    <img src="_/assets/images/logo-maismenu.png" alt="" />
+                </a>
+            </div>
+
+            <div class="right">
+                <ul class="list-unstyled list-inline">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</header>
+
+<section id="clients" class="clients" style="padding-top: 40px; padding-bottom: 40px;">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-12" ng-repeat="client in clients">
+
+                <div class="client">
+
+                    <figure>
+                        <img ng-src="{{client.logo | uploadDir}}" alt="{{client.user}}" />
+                    </figure>
+
+                    <div class="client-info">
+                        <strong>{{client.user}}</strong><br>
+                        {{client.email}}<br>
+                        {{client.title}}<br>
+                        {{client.tel}}<br>
+                        {{client.website}}
+                        <br>
+                        <br>
+                        <a ng-href="{{ API.url + '/client/' + client.user + '/index' }}">ir ao Mais Menu ({{client.user}})</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+
+      <p class="copyright">&reg; 2016 Mais Menu. Todos os direitos reservados.</p>
+
+      <a class="sharkdev" href="http://sharkdev.com.br" target="_blank" title="Desenvolvido por SHARKDEV">
+          <img src="_/assets/images/logo-sharkdev-small.png" alt="logo-sharkdev-small.png" />
+      </a>
+
+</footer>
