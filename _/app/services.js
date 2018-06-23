@@ -29,7 +29,8 @@ angular.module('cardapioApp.services', [])
                 district    : client.district,
                 city        : client.city,
                 state       : client.state,
-                user        : client.client,
+				user        : client.client,
+				password    : '',
                 email       : client.email,
                 title       : 'Mais Menu de ' +client.client
             };

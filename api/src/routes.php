@@ -60,9 +60,11 @@ $app->get('/clients/user/[{user}]', function ($request, $response, $args) {
 // Register new client
 $app->post('/clients', function ($request, $response) {
 	$input = $request->getParsedBody();
-	$keys = array_keys($input); //Paga as chaves do array
+	$keys = array_keys($input); // Pega as chaves do array
 
 	$sth = $this->db->prepare("INSERT INTO clients (".implode(',', $keys).") VALUES (:".implode(",:", $keys).")");
+
+	$input['password'] = password_hash('teste', PASSWORD_DEFAULT); // generate pass hash
 
 	foreach ($input as $key => $value) {
 		$sth ->bindValue(':'.$key, $value);
@@ -72,3 +74,11 @@ $app->post('/clients', function ($request, $response) {
 	$input['id'] = $this->db->lastInsertId();
 	return $this->response->withJson($input);
 });
+
+
+
+function random_password( $length = 8 ) {
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
+    $password = substr( str_shuffle( $chars ), 0, $length );
+    return $password;
+}
