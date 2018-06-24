@@ -1,6 +1,6 @@
 angular.module('cardapioApp.controller', ['angular.viacep'])
 
-.controller('IndexController', function($scope, $state, $stateParams, $q, CLIENTS, userService, geolocation, viaCep) {
+.controller('IndexController', function($scope, $state, $stateParams, $q, userService, geolocation, viaCep, CLIENTS) {
 
     console.log('controller: Cardapio Controller');
 

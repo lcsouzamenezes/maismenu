@@ -10,11 +10,15 @@ angular.module('cardapioApp.services', [])
     return ApiRestangular.service('clients');
 })
 
+.factory('CLIENT_EXISTS', function(ApiRestangular){
+    return ApiRestangular.service('clients/userexists');
+})
+
 .factory('CLIENT', function(ApiRestangular){
     return ApiRestangular.service('clients/user');
 })
 
-.service('userService', function($http, $q, $rootScope, $window, $log, CLIENTS, CLIENT, API) {
+.service('userService', function($http, $q, $rootScope, $window, $log, CLIENTS, CLIENT_EXISTS, API) {
 
     return {
 
@@ -54,11 +58,15 @@ angular.module('cardapioApp.services', [])
         },
 
         checkClient : function (client) {
-            return CLIENT.one(client).get()
-            .then(function(res) {
-                if(res) { return false; }
-                else { return true; }
+
+			return CLIENT_EXISTS.one(client).get()
+
+			.then(function(res) {
+                if(!res.exists) {
+					return true; 
+				}
             });
+
         }
     };
 

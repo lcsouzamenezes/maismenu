@@ -571,10 +571,10 @@ angular.module('cardapioAdminApp.controllers', [])
     var mainContentArea = document.querySelector("[role='main']");
 
     function closeMenu() {
-        $timeout(function() { $mdSidenav('left').close(); });
+		$timeout(function () { $mdSidenav('left').close(); }, false);
     }
     function openMenu() {
-        $timeout(function() { $mdSidenav('left').open(); });
+		$timeout(function () { $mdSidenav('left').open(); }, false);
     }
     function openPage() {
         $scope.closeMenu();

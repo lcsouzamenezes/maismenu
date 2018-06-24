@@ -2,7 +2,7 @@
 return [
     'settings' => [
         'displayErrorDetails'    => true, // set to false in production
-        'addContentLengthHeader' => true, // Allow the web server to send the content-length header
+        'addContentLengthHeader' => false, // Allow the web server to send the content-length header
 
         // Renderer settings
         'renderer' => [
@@ -18,10 +18,16 @@ return [
 
 		// Database connection settings
         "db" => [
-            "host"    => "127.0.0.1",
-            "dbname"  => "maismenu_api",
-            "user"    => "riesco",
-            "pass"    => "qui02nho04"
+			'host'      => getenv('DB_HOST'),
+			'dbname'    => getenv('DB_DATABASE'),
+			'user'  	=> getenv('DB_USERNAME'),
+			'pass'  	=> getenv('DB_PASSWORD'),
+			'charset'   => 'utf8',
         ],
+
+		// jwt settings
+		"jwt" => [
+			'secret' => getenv('JWT_SECRET'),
+		]
     ],
 ];

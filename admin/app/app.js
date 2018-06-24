@@ -20,7 +20,7 @@ angular.module('cardapioAdminApp',[
 //Routes
 .config(function($stateProvider, $locationProvider, $urlRouterProvider){
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/login');
 
     $stateProvider
 
@@ -163,62 +163,66 @@ angular.module('cardapioAdminApp',[
 
 })
 
-.run(function($rootScope, $state, $stateParams, $window, $location, AuthenticationService, userService, CLIENTS, PRODUCTS_USER) {
+.run(function($rootScope, $state, $stateParams, $window, $location, $http, AuthenticationService, userService, base64, CLIENTS, PRODUCTS) {
 
     $rootScope.$state       = $state;
     $rootScope.$stateParams = $stateParams;
 
-    CLIENTS.one('teste').get()
-    .then(function(res){
-        //console.log(res);
-        $rootScope.client = res;
-    });
 
-    PRODUCTS_USER.one('teste').get()
-    .then(function(res){
-        // console.log(res);
-        $rootScope.products = res;
-    });
-
-
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 
         // Auth
         var shouldLogin = !$window.sessionStorage.token && !AuthenticationService.isLogged;
 
-        //$rootScope.Authenticated = shouldLogin;
+        $rootScope.Authenticated = shouldLogin;
 
         var isLogin = toState.name === 'admin.login';
-        if(isLogin){
+        if(isLogin) {
            return;
         }
 
         if(shouldLogin) {
-            $location.url(toParams.client+ '/login');
-            return;
+			$rootScope.$evalAsync(function () {
+            	$location.path(toParams.client+ '/login');
+            });
         }
 
-        // get Client data
-        //if($window.sessionStorage.token) {
-            //userService.getUser();
-
-            //if(!$rootScope.client) {
-
-                CLIENTS.one('teste').get()
-                .then(function(res){
-                    // console.log(res);
-                    $rootScope.client = res;
-                });
-            //}
-
-            PRODUCTS.one('teste').get()
-            .then(function(res){
-                // console.log(res);
-                $rootScope.products = res;
-            });
-
-        //}
 
     });
+
+	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+
+		event.preventDefault();
+
+		// Set Client
+		$rootScope.currentUser = $stateParams.client;
+
+		// get client data
+		if($window.sessionStorage.token && userService.compareUser() === $rootScope.currentUser) {
+
+			if ($rootScope.currentUser) {
+	            $http.defaults.headers.common.Authorization = 'Bearer ' + userService.getToken();
+	        }
+
+			CLIENTS.one($rootScope.currentUser).get()
+			.then(function(res){
+				$rootScope.client = res;
+			});
+
+			PRODUCTS.one($rootScope.currentUser).get()
+			.then(function(res){
+				$rootScope.products = res;
+			});
+
+		} else {
+
+			$rootScope.$evalAsync(function () {
+				base64.deleteJwtFromSessionStorage();
+            	$location.path(toParams.client+ '/login');
+            });
+
+		}
+
+	});
 
 });
