@@ -7,7 +7,7 @@ angular.module('cardapioAdminApp.services', ['restangular'])
 })
 
 .factory('CLIENTS',function(ApiRestangular){
-    return ApiRestangular.service('clients/user');
+    return ApiRestangular.service('auth/clients');
 })
 
 .factory('PRODUCTS',function(ApiRestangular){
@@ -18,9 +18,6 @@ angular.module('cardapioAdminApp.services', ['restangular'])
     return ApiRestangular.service('products/id');
 })
 
-.factory('USERS',function(ApiRestangular){
-    return ApiRestangular.service('users');
-})
 
 .factory('SIDEBAR', function() {
 
@@ -141,7 +138,7 @@ angular.module('cardapioAdminApp.services', ['restangular'])
     return $window._;
 })
 
-// Slugify
+// slugify
 .factory('slugify', function() {
     var self = this;
     self.generate = function(slug){

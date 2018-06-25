@@ -85,7 +85,7 @@ angular.module('cardapioAdminApp.auth', [])
 })
 
 
-.service('userService', function($http, $q, $rootScope, $window, $log, toast, base64, USERS, API) {
+.service('userService', function($http, $q, $rootScope, $window, $log, toast, base64, CLIENTS, API) {
 
 	return {
 

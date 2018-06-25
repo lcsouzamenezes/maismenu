@@ -95,27 +95,29 @@ angular.module('cardapioAdminApp.controllers', [])
 
 })
 
-.controller('AddProductsController', function($rootScope, $scope, $state, toast, slugify){
+.controller('AddProductsController', function($rootScope, $scope, $state, toast, slugify, PRODUCTS){
 
     console.log('controller: Add Product Controller');
 
 
-    $scope.product = {
-        _created_on: new Date()
-    };
+    $scope.saveProduct = function() {
 
-    $scope.saveProduct = function(product){
+        $scope.product.username = $rootScope.currentUser;
 
-        if(!$rootScope.client.products) $rootScope.client.products = [];
 
-        $rootScope.client.products.push(product);
+        PRODUCTS.post($scope.product)
 
-        $rootScope.client.put({client: $rootScope.client.client})
+        .then(function(res) {
 
-        .then(function(res){
-            $rootScope.client = res;
-            $state.go('admin.products', {client: $rootScope.client.client});
-            toast.msgToast(product.title+ ' criado!');
+            console.log(res);
+            toast.msgToast('Produto criado com sucesso.');
+            $state.go('admin.editProduct', {id: res.id});
+
+        }, function(err) {
+
+            toast.msgToast('Erro: falha ao registrar Produto.');
+            console.log(err);
+
         });
 
     };
@@ -126,7 +128,7 @@ angular.module('cardapioAdminApp.controllers', [])
 
 })
 
-.controller('EditProductsController', function($rootScope, $scope, $state, $stateParams, $http, slugify, toast, CLIENTS, PRODUCTS, API){
+.controller('EditProductsController', function($rootScope, $scope, $state, $stateParams, $http, slugify, toast, PRODUCT, API){
 
     console.log('controller: Edit Product Controller');
 
@@ -135,22 +137,16 @@ angular.module('cardapioAdminApp.controllers', [])
     console.log('product id: ' +id);
 
 
-    $http.get(API.api +'/products/'+ id)
+    PRODUCT.one(id).get()
     .then(function(res) {
-        console.log(res);
-        $scope.product = res.data;
+        $scope.product = res;
         $scope.product.created_on = new Date($scope.product.created_on);
     });
 
-    $scope.saveProduct = function(product){
+    $scope.saveProduct = function(){
 
-        console.log(product);
-
-        //$scope.product.one($scope.product.id ).put()
-
-        $http.put(API.api +'/products/' +$scope.product.id, product)
-
-        .then(function(res){
+        $scope.product.put()
+        .then(function(res) {
 
             $scope.product = res;
             $scope.product.created_on = new Date($scope.product.created_on);
@@ -160,13 +156,15 @@ angular.module('cardapioAdminApp.controllers', [])
         }, function(err){
 
             toast.msgToast('Ocorreu um erro ao atualizar o produto');
+            console.log(err);
 
         });
+
     };
 
     $scope.update = function(msg){
 
-        $rootScope.client.put()
+        $rootScope.product.put()
 
         .then(function(res){
             $rootScope.client = res;
@@ -571,10 +569,10 @@ angular.module('cardapioAdminApp.controllers', [])
     var mainContentArea = document.querySelector("[role='main']");
 
     function closeMenu() {
-		$timeout(function () { $mdSidenav('left').close(); }, false);
+		$timeout(function () { $mdSidenav('left').close(); }, true);
     }
     function openMenu() {
-		$timeout(function () { $mdSidenav('left').open(); }, false);
+		$timeout(function () { $mdSidenav('left').open(); }, true);
     }
     function openPage() {
         $scope.closeMenu();

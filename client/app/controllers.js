@@ -6,6 +6,7 @@ angular.module('cardapioClientApp.controller', [])
 
 
     if(!$rootScope.client) {
+
         CLIENTS.one($stateParams.client).get()
 
         .then(function(res){

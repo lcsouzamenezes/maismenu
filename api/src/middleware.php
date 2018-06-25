@@ -1,7 +1,6 @@
 <?php
-// Application middleware
 
-// e.g: $app->add(new \Slim\Csrf\Guard);
+// Application middleware
 
 $app->add(new \Tuupola\Middleware\JwtAuthentication([
 	"path"    	=> ["/auth"],
@@ -15,7 +14,6 @@ $app->add(new \Tuupola\Middleware\JwtAuthentication([
 		return $response
             ->withHeader("Content-Type", "application/json")
             ->write(json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
-
     }
 
 ]));
