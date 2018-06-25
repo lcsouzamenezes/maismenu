@@ -163,7 +163,7 @@ angular.module('cardapioAdminApp',[
 
 })
 
-.run(function($rootScope, $state, $stateParams, $window, $location, AuthenticationService, userService, CLIENTS, PRODUCTS_USER) {
+.run(function($rootScope, $state, $stateParams, $window, $location, AuthenticationService, userService, CLIENTS, PRODUCTS) {
 
     $rootScope.$state       = $state;
     $rootScope.$stateParams = $stateParams;
@@ -174,7 +174,7 @@ angular.module('cardapioAdminApp',[
         $rootScope.client = res;
     });
 
-    PRODUCTS_USER.one('teste').get()
+    PRODUCTS.one('teste').get()
     .then(function(res){
         // console.log(res);
         $rootScope.products = res;
@@ -211,7 +211,7 @@ angular.module('cardapioAdminApp',[
                 });
             //}
 
-            PRODUCTS.one('teste').get()
+            PRODUCT.one('teste').get()
             .then(function(res){
                 // console.log(res);
                 $rootScope.products = res;

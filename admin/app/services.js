@@ -7,11 +7,11 @@ angular.module('cardapioAdminApp.services', ['restangular'])
 })
 
 .factory('CLIENTS',function(ApiRestangular){
-    return ApiRestangular.service('clients');
+    return ApiRestangular.service('clients/user');
 })
 
-.factory('PRODUCTS_USER',function(ApiRestangular){
-    return ApiRestangular.service('products/user');
+.factory('PRODUCT',function(ApiRestangular){
+    return ApiRestangular.service('products/id');
 })
 
 .factory('PRODUCTS',function(ApiRestangular){

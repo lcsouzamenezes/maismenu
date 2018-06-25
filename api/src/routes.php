@@ -3,6 +3,9 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
+
+
+
 // Routes
 // get all products
 $app->get('/products/{user}', function ($request, $response, $args) {

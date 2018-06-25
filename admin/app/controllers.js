@@ -4,7 +4,7 @@ angular.module('cardapioAdminApp.controllers', [])
 
     console.log('controller: Dashboard Controller');
 
-    $scope.uploaddir = API.upload;
+    // $scope.uploaddir = API.upload;
 
 })
 
