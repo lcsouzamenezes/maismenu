@@ -1,8 +1,10 @@
 angular.module('cardapioApp.controller', ['angular.viacep'])
 
-.controller('IndexController', function($scope, $state, $stateParams, $q, CLIENTS, userService, geolocation, viaCep) {
+.controller('IndexController', function($scope, $state, $stateParams, $q, userService, geolocation, viaCep, API, CLIENTS) {
 
     console.log('controller: Cardapio Controller');
+
+	$scope.API = API;
 
     var distance = 6;
 

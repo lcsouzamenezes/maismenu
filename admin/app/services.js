@@ -10,18 +10,13 @@ angular.module('cardapioAdminApp.services', ['restangular'])
     return ApiRestangular.service('clients/user');
 })
 
-.factory('PRODUCT',function(ApiRestangular){
-    return ApiRestangular.service('products/id');
-})
-
 .factory('PRODUCTS',function(ApiRestangular){
     return ApiRestangular.service('products');
 })
 
-
-// .factory('PRODUCT_ID',function(ApiRestangular){
-//     return ApiRestangular.service('products/id');
-// })
+.factory('PRODUCT',function(ApiRestangular){
+    return ApiRestangular.service('products/id');
+})
 
 .factory('USERS',function(ApiRestangular){
     return ApiRestangular.service('users');
@@ -124,7 +119,7 @@ angular.module('cardapioAdminApp.services', ['restangular'])
     };
 })
 
-
+// toast messages
 .factory('toast', function toast($mdToast) {
     var service = {
         message: '',

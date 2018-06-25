@@ -1,7 +1,7 @@
 <?php
 return [
     'settings' => [
-        'displayErrorDetails' => true, // set to false in production
+        'displayErrorDetails'    => true, // set to false in production
         'addContentLengthHeader' => false, // Allow the web server to send the content-length header
 
         // Renderer settings
@@ -11,16 +11,23 @@ return [
 
         // Monolog settings
         'logger' => [
-            'name' => 'slim-app',
-            'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
+            'name'  => 'slim-app',
+            'path'  => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
+
 		// Database connection settings
         "db" => [
-            "host"    => "localhost",
-            "dbname"  => "maismenu_api",
-            "user"    => "riesco",
-            "pass"    => "mktvirtual"
+			'host'      => getenv('DB_HOST'),
+			'dbname'    => getenv('DB_DATABASE'),
+			'user'  	=> getenv('DB_USERNAME'),
+			'pass'  	=> getenv('DB_PASSWORD'),
+			'charset'   => 'utf8',
         ],
+
+		// jwt settings
+		"jwt" => [
+			'secret' => getenv('JWT_SECRET'),
+		]
     ],
 ];

@@ -32,6 +32,7 @@ angular.module('cardapioAdminApp.config', ['ng-sortable', 'md.data.table', 'text
     // $mdDateLocaleProvider.monthHeaderFormatter = function(date) {
     //     return myShortMonths[date.getMonth()] + ' ' + date.getFullYear();
     // };
+
     // In addition to date display, date components also need localized messages
     // for aria-labels for screen-reader users.
     $mdDateLocaleProvider.weekNumberFormatter = function(weekNumber) {
@@ -42,16 +43,20 @@ angular.module('cardapioAdminApp.config', ['ng-sortable', 'md.data.table', 'text
 
 })
 
+
+// Restangular Interceptor
 .config(['RestangularProvider', function(RestangularProvider) {
 
-    RestangularProvider.setRestangularFields({
-        id : "_id.$oid",
-    });
+    // RestangularProvider.setRestangularFields({
+    //     id : "_id.$oid",
+    // });
 
     RestangularProvider.setDefaultHeaders({'Accept': 'application/hal+json', 'Content-Type': 'application/json', 'No-Auth-Challenge': 'true'});
 
 }])
 
 .config(['$qProvider', function ($qProvider) {
+
     $qProvider.errorOnUnhandledRejections(false);
+
 }]);
