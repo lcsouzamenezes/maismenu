@@ -197,6 +197,8 @@ angular.module('cardapioAdminApp',[
 		// Set Client
 		$rootScope.currentUser = $stateParams.client;
 
+		console.log($rootScope.currentUser);
+
 		// get client data
 		if($window.sessionStorage.token && userService.compareUser() === $rootScope.currentUser) {
 

@@ -34,7 +34,6 @@ angular.module('cardapioApp.services', [])
                 city        : client.city,
                 state       : client.state,
 				user        : client.client,
-				password    : '',
                 email       : client.email,
                 title       : 'Mais Menu de ' +client.client
             };
@@ -63,7 +62,7 @@ angular.module('cardapioApp.services', [])
 
 			.then(function(res) {
                 if(!res.exists) {
-					return true; 
+					return true;
 				}
             });
 

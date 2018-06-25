@@ -5,7 +5,7 @@ angular.module('cardapioAdminApp.auth', [])
 
 	$scope.login = function() {
 
-		if($rootScope.currentUser !== $scope.user.user && $scope.user.user != 'admin'){
+		if($rootScope.currentUser !== $scope.user.username && $scope.user.username != 'admin'){
 			toast.msgToast('Cliente ID inválido. Tente novamente.');
 			return;
 		}
@@ -16,8 +16,8 @@ angular.module('cardapioAdminApp.auth', [])
 		//Response Handler
 		.then(function(res) {
 			AuthenticationService.isLogged = true;
-			$location.url($scope.user.user+ '/dashboard');
-			toast.msgToast($scope.user.user+ ', seja bem-vindo novamente.');
+			$location.url($scope.user.username+ '/dashboard');
+			toast.msgToast($scope.user.username+ ', seja bem-vindo novamente.');
 		},
 		function(err) {
 			AuthenticationService.isLogged = false;
@@ -96,7 +96,7 @@ angular.module('cardapioAdminApp.auth', [])
 		compareUser : function(user) {
 
 			var getJwtProfile = base64.getJwtProfile();
-			var profileJwt = getJwtProfile.$$state.value.user;
+			var profileJwt = getJwtProfile.$$state.value.username;
 
 			return profileJwt;
 

@@ -40,6 +40,7 @@ $app->put('/products/id/{id}', function ($request, $response, $args) {
 });
 
 
+
 // Return if user exists
 $app->get('/clients/userexists/{user}', function (Request $request, Response $response, array $args) {
 	$sth = $this->db->prepare("SELECT * FROM clients WHERE user=:user");
@@ -55,14 +56,14 @@ $app->get('/clients/userexists/{user}', function (Request $request, Response $re
 	}
 
 });
+
 // Register new client
 $app->post('/clients', function ($request, $response) {
 	$input = $request->getParsedBody();
 	$keys = array_keys($input); // Pega as chaves do array
 
+	// Register Client
 	$sth = $this->db->prepare("INSERT INTO clients (".implode(',', $keys).") VALUES (:".implode(",:", $keys).")");
-
-	$input['password'] = password_hash('teste', PASSWORD_DEFAULT); // generate pass hash
 
 	foreach ($input as $key => $value) {
 		$sth ->bindValue(':'.$key, $value);
@@ -70,7 +71,39 @@ $app->post('/clients', function ($request, $response) {
 
 	$sth->execute();
 	$input['id'] = $this->db->lastInsertId();
+
+
+	// Register User
+	$sth2 = $this->db->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
+
+	$sth2 ->bindValue('username', $input['username']);
+	$sth2 ->bindValue('email', $input['email']);
+	// $sth2 ->bindValue('password', password_hash(random_password(), PASSWORD_DEFAULT)); // generate pass hash
+	$sth2 ->bindValue('password', password_hash('teste', PASSWORD_DEFAULT)); // generate pass hash
+
+	$sth2->execute();
+	$input['id'] = $this->db->lastInsertId();
+
+
 	return $this->response->withJson($input);
+
+});
+
+// Get all clients
+$app->get('/clients/', function (Request $request, Response $response, array $args) {
+	$sth = $this->db->prepare("SELECT * FROM clients ORDER BY id");
+	$sth->execute();
+	$response = $sth->fetchAll();
+	return $this->response->withJson($response);
+});
+
+// Retrieve client by username
+$app->get('/clients/user/[{user}]', function (Request $request, Response $response, array $args) {
+	$sth = $this->db->prepare("SELECT * FROM clients WHERE user=:user");
+	$sth->bindParam("user", $args['user']);
+	$sth->execute();
+	$response = $sth->fetchObject();
+	return $this->response->withJson($response);
 });
 
 
@@ -92,9 +125,9 @@ function random_password( $length = 8 ) {
 $app->post('/login', function (Request $request, Response $response, array $args) {
 
     $input = $request->getParsedBody();
-    $sql = "SELECT * FROM clients WHERE user= :user";
+    $sql = "SELECT * FROM users WHERE username= :username";
     $sth = $this->db->prepare($sql);
-    $sth->bindParam("user", $input['user']);
+    $sth->bindParam('username', $input['username']);
     $sth->execute();
     $user = $sth->fetchObject();
 
@@ -104,37 +137,22 @@ $app->post('/login', function (Request $request, Response $response, array $args
     }
 
     // verify password.
-    if (!password_verify($input['password'],$user->password)) {
+    if (!password_verify($input['password'], $user->password)) {
         return $this->response->withJson(['error' => true, 'message' => 'These credentials do not match our records.']);
     }
 
     $settings = $this->get('settings'); // get settings array.
-    $token = JWT::encode(['id' => $user->id, 'user' => $user->user], $settings['jwt']['secret'], "HS256");
+    $token = JWT::encode(['id' => $user->id, 'username' => $user->username], $settings['jwt']['secret'], "HS256");
 
     return $this->response->withJson(['token' => $token]);
 
 });
 
-
 $app->group('/auth', function(\Slim\App $app) {
 
-    $app->get('/user',function(Request $request, Response $response, array $args) {
-
-		print_r($request->getAttribute('decoded_token_data'));
-
-    });
-
-	// Get all clients
-	$app->get('/clients/', function (Request $request, Response $response, array $args) {
-		$sth = $this->db->prepare("SELECT * FROM clients ORDER BY id");
-		$sth->execute();
-		$response = $sth->fetchAll();
-		return $this->response->withJson($response);
-	});
-
-	// Retrieve client by username
-	$app->get('/clients/user/[{user}]', function (Request $request, Response $response, array $args) {
-		$sth = $this->db->prepare("SELECT * FROM clients WHERE user=:user");
+	// Retrieve user by username
+	$app->get('/users/user/[{user}]', function (Request $request, Response $response, array $args) {
+		$sth = $this->db->prepare("SELECT * FROM users WHERE user=:user");
 		$sth->bindParam("user", $args['user']);
 		$sth->execute();
 		$response = $sth->fetchObject();
